@@ -1,7 +1,7 @@
 #ifndef MONITORENGINE_HPP
 #define MONITORENGINE_HPP
 
-#include "Isensor.hpp"
+#include "ISensor.hpp"
 
 #include <memory>
 #include <vector>

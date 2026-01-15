@@ -1,7 +1,7 @@
 #ifndef TEMPERATURESENSOR_HPP
 #define TEMPERATURESENSOR_HPP
 
-#include "Isensor.hpp"
+#include "ISensor.hpp"
 
 /**
  * @brief Concrete implementation of a temperature sensor.

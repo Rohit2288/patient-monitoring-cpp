@@ -1,7 +1,7 @@
 #ifndef HEARTRATESENSOR_HPP
 #define HEARTRATESENSOR_HPP
 
-#include "Isensor.hpp"
+#include "ISensor.hpp"
 
 /**
  * @brief Concrete implementation of a heart rate sensor.
