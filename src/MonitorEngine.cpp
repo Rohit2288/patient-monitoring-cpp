@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <chrono>
+#include <thread>
+#include <string>
 
 /**
  * @brief Constructor initializes engine state.
@@ -60,30 +62,35 @@ void MonitorEngine::monitoringLoop() {
             auto reading = sensor->getReading();
 
             if (reading.has_value()) {
-    std::cout << sensor->getName()
-              << " reading: "
-              << reading.value()
-              << std::endl;
-
-    // Evaluate safety
-    if (sensor->getName() == "Heart Rate Sensor") {
-        auto alarm = alarmManager_.evaluateHeartRate(reading.value());
-        if (alarm.has_value()) {
-            std::cout << alarm.value() << std::endl;
-        }
-    }
-
-    if (sensor->getName() == "Temperature Sensor") {
-        auto alarm = alarmManager_.evaluateTemperature(reading.value());
-        if (alarm.has_value()) {
-            std::cout << alarm.value() << std::endl;
-        }
-    }
-}
-else {
                 std::cout << sensor->getName()
-                          << " reading unavailable"
+                          << " reading: "
+                          << reading.value()
                           << std::endl;
+
+                // Evaluate safety
+                if (sensor->getName() == "Heart Rate Sensor") {
+                    auto alarm =
+                        alarmManager_.evaluateHeartRate(reading.value());
+                    if (alarm.has_value()) {
+                        std::cout << alarm.value() << std::endl;
+                        logger_.logWarning(alarm.value());
+                    }
+                }
+
+                if (sensor->getName() == "Temperature Sensor") {
+                    auto alarm =
+                        alarmManager_.evaluateTemperature(reading.value());
+                    if (alarm.has_value()) {
+                        std::cout << alarm.value() << std::endl;
+                        logger_.logWarning(alarm.value());
+                    }
+                }
+            }
+            else {
+                std::string msg =
+                    sensor->getName() + " reading unavailable";
+                std::cout << msg << std::endl;
+                logger_.logWarning(msg);
             }
         }
 

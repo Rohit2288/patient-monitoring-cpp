@@ -13,4 +13,5 @@ add_executable(patient_monitor
     src/HeartRateSensor.cpp
     src/TemperatureSensor.cpp
     src/AlarmManager.cpp
+    src/SystemLogger.cpp
 )

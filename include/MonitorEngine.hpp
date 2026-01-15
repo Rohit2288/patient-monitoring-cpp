@@ -3,6 +3,7 @@
 
 #include "ISensor.hpp"
 #include "AlarmManager.hpp"
+#include "SystemLogger.hpp"
 
 
 #include <memory>
@@ -46,7 +47,7 @@ private:
     std::thread workerThread_;
     std::atomic<bool> running_;
     AlarmManager alarmManager_;
-
+    SystemLogger logger_;
 };
 
 #endif // MONITORENGINE_HPP
