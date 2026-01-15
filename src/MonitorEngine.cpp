@@ -60,11 +60,27 @@ void MonitorEngine::monitoringLoop() {
             auto reading = sensor->getReading();
 
             if (reading.has_value()) {
-                std::cout << sensor->getName()
-                          << " reading: "
-                          << reading.value()
-                          << std::endl;
-            } else {
+    std::cout << sensor->getName()
+              << " reading: "
+              << reading.value()
+              << std::endl;
+
+    // Evaluate safety
+    if (sensor->getName() == "Heart Rate Sensor") {
+        auto alarm = alarmManager_.evaluateHeartRate(reading.value());
+        if (alarm.has_value()) {
+            std::cout << alarm.value() << std::endl;
+        }
+    }
+
+    if (sensor->getName() == "Temperature Sensor") {
+        auto alarm = alarmManager_.evaluateTemperature(reading.value());
+        if (alarm.has_value()) {
+            std::cout << alarm.value() << std::endl;
+        }
+    }
+}
+else {
                 std::cout << sensor->getName()
                           << " reading unavailable"
                           << std::endl;

@@ -2,6 +2,8 @@
 #define MONITORENGINE_HPP
 
 #include "ISensor.hpp"
+#include "AlarmManager.hpp"
+
 
 #include <memory>
 #include <vector>
@@ -43,6 +45,8 @@ private:
     std::vector<std::unique_ptr<ISensor>> sensors_;
     std::thread workerThread_;
     std::atomic<bool> running_;
+    AlarmManager alarmManager_;
+
 };
 
 #endif // MONITORENGINE_HPP
